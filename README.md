@@ -22,10 +22,68 @@ Close the Simulation Once done, by going to Simulation → "Close Simulation
 
 Input/Output Signal Diagram:
 
+<img width="559" height="961" alt="Screenshot 2025-09-09 142042" src="https://github.com/user-attachments/assets/da7b66cd-043c-4910-b42b-8957ffb25c04" />
+
 RTL Code:
 
+       module Sevensegment(bcd,seg);
+       input[3:0]bcd;
+       output reg[6:0]seg;
+       always@(bcd)
+       begin
+     case(bcd)
+     4'b0000:seg=7'b0111111;
+     4'b0001:seg=7'b0001010;
+     4'b0010:seg=7'b1110011;
+     4'b0011:seg=7'b1011011;
+     4'b0100:seg=7'b1001110;
+     4'b0101:seg=7'b1011101;
+     4'b0110:seg=7'b1111101;
+     4'b0111:seg=7'b0001011;
+     4'b1000:seg=7'b1111111;
+     4'b1001:seg=7'b1011111;
+     default:seg=7'b0000000;
+     endcase
+    end
+    endmodule
+    
 TestBench:
+module Sevensegment_tb;
+  reg [3:0] bcd_tb;
+  wire [6:0] seg_tb;
+
+  Sevensegment dut(.bcd(bcd_tb),.seg(seg_tb));
+
+initial 
+
+    begin
+    bcd_tb = 4'b0000; 
+    #100;
+    bcd_tb = 4'b0001; 
+    #100;
+    bcd_tb = 4'b0010; 
+    #100;
+    bcd_tb = 4'b0011; 
+    #100;
+    bcd_tb = 4'b0100; 
+    #100;
+    bcd_tb = 4'b0101; 
+    #100;
+    bcd_tb = 4'b0110; 
+    #100;
+    bcd_tb = 4'b0111; 
+    #100;
+    bcd_tb = 4'b1000; 
+    #100;
+    bcd_tb = 4'b1001; 
+    #100;
+    end
+    endmodule
 
 Output waveform:
 
+<img width="1415" height="901" alt="Screenshot 2025-09-09 141648" src="https://github.com/user-attachments/assets/734b810f-318a-4ea0-8ad5-b496f7aa8220" />
+
 Conclusion:
+      
+  The Seven Segment Display experiment successfully demonstrated how numerical values (0–9) can be represented using a combination of illuminated segments. By giving the proper binary or BCD inputs to the decoder/driver circuit, the display showed the corresponding digit clearly. This experiment helped in understanding the working principle of segment displays, the concept of active high/active low configurations, and the importance of digital logic in driving display devices. It also established the practical application of combinational logic circuits in real-time devices such as calculators, digital clocks, and measuring instruments.
