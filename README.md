@@ -48,13 +48,14 @@ RTL Code:
     endmodule
     
 TestBench:
-module Sevensegment_tb;
-  reg [3:0] bcd_tb;
-  wire [6:0] seg_tb;
+  
+    module Sevensegment_tb;
+    reg [3:0] bcd_tb;
+    wire [6:0] seg_tb;
 
-  Sevensegment dut(.bcd(bcd_tb),.seg(seg_tb));
+    Sevensegment dut(.bcd(bcd_tb),.seg(seg_tb));
 
-initial 
+    initial 
 
     begin
     bcd_tb = 4'b0000; 
